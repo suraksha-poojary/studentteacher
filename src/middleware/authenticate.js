@@ -12,8 +12,6 @@ const authenticate = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.TOKENKEY);
     req.user = decoded;
     next();
-
-    next();
   } catch (err) {
     console.log("authenticate", err);
     response = RESPONSE.INVALID_DATA;

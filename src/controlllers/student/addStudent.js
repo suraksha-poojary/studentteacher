@@ -8,26 +8,26 @@ import multer from "multer";
 import initstudentModel from "../../model/studentModel.js";
 const uploads = image.array("image", 2);
 
-router.post("/", authenticate, uploads, async (req, res) => {
+router.post("/", authenticate, async (req, res) => {
   try {
-    // uploads(req, res, async (err) => {
+    uploads(req, res, async (err) => {
       let response;
-    //   // console.log(req.files);
-    //   if (!req.files || req.files == "") {
-    //     response = RESPONSE.MANDATORY_PARAMS;
+      // console.log(req.files);
+      if (!req.files || req.files == "") {
+        response = RESPONSE.MANDATORY_PARAMS;
 
-    //     return res.json({
-    //       code: response.code,
-    //       message: "image" + response.message,
-    //     });
-    //   } else if (err instanceof multer.MulterError) {
-    //     // console.log("MulterErr-", err);
-    //     return res.json(RESPONSE.MULTER_ERR);
-    //   }
+        return res.json({
+          code: response.code,
+          message: "image" + response.message,
+        });
+      } else if (err instanceof multer.MulterError) {
+        // console.log("MulterErr-", err);
+        return res.json(RESPONSE.MULTER_ERR);
+      }
 
-    //   if (err) {
-    //     return res.json(RESPONSE.UNKNOWN_ERROR);
-    //   }
+      if (err) {
+        return res.json(RESPONSE.UNKNOWN_ERROR);
+      }
 
       let fileName = [];
 
@@ -67,7 +67,7 @@ router.post("/", authenticate, uploads, async (req, res) => {
       });
 
       return res.json(RESPONSE.SUCCESS);
-    // });
+    });
   } catch (err) {
     // console.log(err);
     return res.json(RESPONSE.UNKNOWN_ERROR);

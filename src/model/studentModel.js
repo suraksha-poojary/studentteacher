@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const studentModel = {
+
+  student_name: {
+    type: String,
+    required: true,
+  },
+  
   rollno: {
     type: String,
     required: true,
